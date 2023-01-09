@@ -3,7 +3,11 @@ plugins {
 }
 
 kotlin {
-    jvm()
+    jvm{
+        testRuns["test"].executionTask.configure {
+            useJUnitPlatform()
+        }
+    }
     js(IR) {
         useCommonJs()
         browser {

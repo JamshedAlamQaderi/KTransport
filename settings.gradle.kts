@@ -13,6 +13,7 @@ pluginManagement {
 
         id("com.google.protobuf") version "0.8.18"
         id("io.github.timortel.kotlin-multiplatform-grpc-plugin") version "0.2.1"
+        id("com.google.devtools.ksp") version extra["kspVersion"] as String
     }
 }
 
@@ -34,4 +35,4 @@ file("./grpc")
         include(":${dir.name}")
         project(":${dir.name}").projectDir = dir.absoluteFile
     }
-include(":ktransport")
+include(":ktransport", ":ktransport-ksp", ":example")
