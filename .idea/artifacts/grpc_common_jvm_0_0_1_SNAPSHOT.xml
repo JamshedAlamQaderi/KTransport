@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="grpc-common-jvm-0.0.1-SNAPSHOT">
+    <output-path>$PROJECT_DIR$/grpc/grpc-common/build/libs</output-path>
+    <root id="archive" name="grpc-common-jvm-0.0.1-SNAPSHOT.jar">
+      <element id="module-output" name="ktransport-project.grpc-common.jvmMain" />
+    </root>
+  </artifact>
+</component>

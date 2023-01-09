@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package com.jamshedalamqaderi.grpc.protos;
+
+option java_multiple_files = true;
+
+message KTransportModel {
+  string reference = 1;
+  string payload = 2;
+}
+
+service KTransportService {
+  rpc onRequestReceived (KTransportModel) returns (KTransportModel);
+
+  rpc onStreamReceived(KTransportModel) returns (stream KTransportModel);
+}
