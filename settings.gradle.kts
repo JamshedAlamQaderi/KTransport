@@ -34,3 +34,4 @@ file("./grpc")
         include(":${dir.name}")
         project(":${dir.name}").projectDir = dir.absoluteFile
     }
+include(":ktransport")
