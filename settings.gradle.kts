@@ -7,9 +7,9 @@ pluginManagement {
     }
 
     plugins {
-        kotlin("multiplatform") version "1.7.22"
-        kotlin("jvm") version "1.7.22"
-        kotlin("plugin.serialization") version "1.7.22"
+        kotlin("multiplatform") version extra["kotlinVersion"] as String
+        kotlin("jvm") version extra["kotlinVersion"] as String
+        kotlin("plugin.serialization") version extra["kotlinVersion"] as String
 
         id("com.google.protobuf") version "0.8.18"
         id("io.github.timortel.kotlin-multiplatform-grpc-plugin") version "0.2.1"
