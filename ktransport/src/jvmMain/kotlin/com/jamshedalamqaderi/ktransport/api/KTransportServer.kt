@@ -1,25 +1,28 @@
 package com.jamshedalamqaderi.ktransport.api
 
+import com.jamshedalamqaderi.ktransport.api.models.ServiceDescription
 import io.grpc.Server
 import io.grpc.ServerBuilder
 
 class KTransportServer private constructor(
-    private val serverPort: Int,
-    private val services: List<Any>
+    serverPort: Int,
+    private val services: List<ServiceDescription>
 ) {
     companion object {
-        fun createServer(serverPort: Int, services: List<Any>): KTransportServer {
+        fun createServer(serverPort: Int, services: List<ServiceDescription>): KTransportServer {
             return KTransportServer(serverPort, services)
         }
     }
 
     private val server: Server = ServerBuilder
         .forPort(serverPort)
-        .addService(KTransportServiceImpl())
+        .addService(KTransportServiceImpl(services))
         .build()
 
     fun start() {
-        server.start().awaitTermination()
+        server
+            .start()
+            .awaitTermination()
     }
 
     fun stop() {

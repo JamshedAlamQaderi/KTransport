@@ -6,6 +6,7 @@ plugins {
 val kotlinxSerializationVersion: String by project
 val grpcVersion: String by project
 val coroutineVersion: String by project
+val kotlinVersion: String by project
 
 kotlin {
     jvm {
@@ -42,6 +43,7 @@ kotlin {
             dependencies {
                 implementation(project(":grpc-common"))
                 implementation("io.grpc:grpc-netty-shaded:$grpcVersion")
+                implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
             }
         }
 
