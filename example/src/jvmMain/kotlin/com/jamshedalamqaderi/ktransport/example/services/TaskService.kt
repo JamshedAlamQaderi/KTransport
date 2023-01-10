@@ -17,6 +17,8 @@ class TaskService {
 
     @KTransportStream
     fun onTaskCreated(forTaskId: Int): Flow<Task> = flow {
-
+        repeat(10) {
+            emit(Task(it, "Task name $it"))
+        }
     }
 }
