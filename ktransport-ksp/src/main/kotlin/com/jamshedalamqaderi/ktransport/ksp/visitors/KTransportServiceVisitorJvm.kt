@@ -30,7 +30,7 @@ class KTransportServiceVisitorJvm(
 ) : KSVisitorVoid() {
     private val servicesListCodeBlockBuilder = CodeBlock.builder()
     private var singleServiceBuilder: CodeBlock.Builder? = null
-    fun startVisit() {
+    init {
         if (classes.isNotEmpty()) {
             fileSpecBuilder.addImport(
                 "kotlinx.serialization",

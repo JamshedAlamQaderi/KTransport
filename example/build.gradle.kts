@@ -1,3 +1,5 @@
+import com.google.devtools.ksp.gradle.KspTaskJvm
+
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")

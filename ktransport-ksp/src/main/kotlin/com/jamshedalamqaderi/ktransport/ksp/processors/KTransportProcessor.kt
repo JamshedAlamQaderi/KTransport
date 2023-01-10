@@ -68,7 +68,7 @@ class KTransportProcessor(
             fileSpecBuilder,
             logger
         )
-        serverServiceVisitor.startVisit()
+
         serverServiceVisitor.buildCodeBlock()
         val fileSpec = fileSpecBuilder.build()
         fileSpec.writeTo(codeGenerator.getJvmModuleDir())
