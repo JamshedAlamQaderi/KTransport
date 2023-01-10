@@ -6,10 +6,12 @@ plugins {
 
 ksp {
     arg("packageName", "com.jamshedalamqaderi.ktransport.example.ksp")
+    arg("buildDir", buildDir.absolutePath)
 }
 
 val kotlinxSerializationVersion: String by project
 val coroutineVersion: String by project
+val kotlinVersion: String by project
 
 kotlin {
     jvm()
@@ -21,12 +23,18 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
             }
+            kotlin.srcDir(projectDir.resolve("build/generated/ktransport/metadata/commonMain/kotlin/"))
+        }
+        val jvmMain by getting{
+            dependencies{
+                implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+            }
         }
     }
 }
 
 dependencies {
-    add("kspCommonMainMetadata", project(":ktransport-ksp"))
+    add("kspJvm", project(":ktransport-ksp"))
 }
 
 
