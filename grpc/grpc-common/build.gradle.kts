@@ -1,3 +1,5 @@
+import io.github.timortel.kotlin_multiplatform_grpc_plugin.generate_mulitplatform_sources.GenerateMultiplatformSourcesTask
+
 plugins {
     kotlin("multiplatform")
     id("io.github.timortel.kotlin-multiplatform-grpc-plugin")
@@ -6,8 +8,9 @@ plugins {
 val grpcMPLibVersion: String by project
 val coroutineVersion: String by project
 
-grpcKotlinMultiplatform{
-    protoSourceFolders.set(listOf(projectDir.resolve("../protos/src/main/proto")))
+
+dependencies{
+    commonMainApi("com.github.TimOrtel.GRPC-Kotlin-Multiplatform:grpc-multiplatform-lib:$grpcMPLibVersion")
 }
 
 kotlin {
@@ -27,7 +30,7 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                implementation(project(":generate-proto"))
+                api(project(":generate-proto"))
                 implementation("com.github.TimOrtel.GRPC-Kotlin-Multiplatform:grpc-multiplatform-lib-jvm:$grpcMPLibVersion")
             }
             kotlin.srcDir(projectDir.resolve("build/generated/source/kmp-grpc/jvmMain/kotlin").canonicalPath)
@@ -39,4 +42,7 @@ kotlin {
             kotlin.srcDir(projectDir.resolve("build/generated/source/kmp-grpc/jsMain/kotlin").canonicalPath)
         }
     }
+}
+tasks.register<GenerateMultiplatformSourcesTask>("generateMPProtos") {
+    protoSourceFolders.set(listOf(projectDir.resolve("../protos/src/main/proto")))
 }

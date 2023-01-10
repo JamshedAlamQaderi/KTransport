@@ -12,7 +12,7 @@ pluginManagement {
         kotlin("plugin.serialization") version extra["kotlinVersion"] as String
 
         id("com.google.protobuf") version "0.8.18"
-        id("io.github.timortel.kotlin-multiplatform-grpc-plugin") version "0.2.1"
+        id("io.github.timortel.kotlin-multiplatform-grpc-plugin") version "0.1.1"
         id("com.google.devtools.ksp") version extra["kspVersion"] as String
     }
 }

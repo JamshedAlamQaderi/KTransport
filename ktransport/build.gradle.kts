@@ -3,10 +3,12 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-val kotlinxSerializationVersion:String by project
+val kotlinxSerializationVersion: String by project
+val grpcVersion: String by project
+val coroutineVersion: String by project
 
 kotlin {
-    jvm{
+    jvm {
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
@@ -24,7 +26,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
+                implementation(project(":grpc-common"))
             }
         }
 
@@ -36,7 +40,8 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-
+                implementation(project(":grpc-common"))
+                implementation("io.grpc:grpc-netty-shaded:$grpcVersion")
             }
         }
 
