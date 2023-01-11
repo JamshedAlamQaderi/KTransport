@@ -14,7 +14,7 @@ suspend fun <I, R> makeApiRequest(
     model: I,
     inputType: KType,
     returnType: KType
-): Any? {
+): R {
     val requestPayload = kmKTransportModel {
         this.reference = reference
         this.payload = Json.encodeToString(Json.serializersModule.serializer(inputType), model)
@@ -32,7 +32,7 @@ suspend fun <I, R> makeStreamRequest(
     model: I,
     inputType: KType,
     returnType: KType
-): Flow<Any?> {
+): Flow<R> {
     val requestPayload = kmKTransportModel {
         this.reference = reference
         this.payload = Json.encodeToString(Json.serializersModule.serializer(inputType), model)

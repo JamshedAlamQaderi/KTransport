@@ -1,9 +1,14 @@
 package com.jamshedalamqader.ktransport.example.client
 
-import com.jamshedalamqaderi.ktransport.api.KTransportClientConfig
+import com.jamshedalamqader.ktransport.example.models.Task
+import com.jamshedalamqaderi.ktransport.api.KTransport
+import com.jamshedalamqaderi.ktransport.example.ksp.client.taskService
+import kotlinx.coroutines.runBlocking
 
 class ClientCall {
     init {
-        KTransportClientConfig.set("127.0.0.1", 8080)
+        runBlocking {
+            KTransport.taskService.createTask(Task(12, "Jamshed"))
+        }
     }
 }

@@ -9,9 +9,11 @@ import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSVisitorVoid
 import com.jamshedalamqaderi.ktransport.api.annotations.KTransportService
 import com.jamshedalamqaderi.ktransport.ksp.interfaces.KTransportCodeGenerator
+import com.jamshedalamqaderi.ktransport.ksp.interfaces.MultiServiceVisitor
 import com.jamshedalamqaderi.ktransport.ksp.models.KTransportOption
-import com.jamshedalamqaderi.ktransport.ksp.visitors.KTransportServiceVisitorCommon
-import com.jamshedalamqaderi.ktransport.ksp.visitors.KTransportServiceVisitorJvm
+import com.jamshedalamqaderi.ktransport.ksp.visitors.IndividualCommonServiceVisitor
+import com.jamshedalamqaderi.ktransport.ksp.visitors.MultipleCommonServiceVisitor
+import com.jamshedalamqaderi.ktransport.ksp.visitors.MultipleJvmServiceVisitor
 import com.squareup.kotlinpoet.FileSpec
 import java.io.File
 
@@ -31,18 +33,31 @@ class KTransportProcessor(
                 .toList()
 
         kTransportServiceSymbols.forEach { ksClassDeclaration ->
-            visitAndSaveCommonModule(
+            visitIndividualServices(
                 ksClassDeclaration,
                 codeGenerator.getCommonModuleDir(),
-                ::KTransportServiceVisitorCommon
+                ::IndividualCommonServiceVisitor
             )
         }
-
-        visitAndSaveJvmModule(kTransportServiceSymbols)
+        visitMultipleServiceInOneVisitor(
+            codeGenerator.getJvmModuleDir(),
+            "server",
+            "KTransportServerExt",
+            kTransportServiceSymbols,
+            ::MultipleJvmServiceVisitor
+        )
+        visitMultipleServiceInOneVisitor(
+            codeGenerator.getCommonModuleDir(),
+            "client",
+            "KTransportClientExt",
+            kTransportServiceSymbols,
+            ::MultipleCommonServiceVisitor
+        )
         return emptyList()
     }
 
-    private fun visitAndSaveCommonModule(
+
+    private fun visitIndividualServices(
         ksClassDeclaration: KSClassDeclaration,
         outputDir: File,
         block: (KSPLogger, FileSpec.Builder) -> KSVisitorVoid
@@ -58,19 +73,25 @@ class KTransportProcessor(
         fileSpec.writeTo(outputDir)
     }
 
-    private fun visitAndSaveJvmModule(kTransportServiceSymbols: List<KSClassDeclaration>) {
+    private fun visitMultipleServiceInOneVisitor(
+        outputDir: File,
+        packageSuffix: String,
+        filename: String,
+        kTransportServiceSymbols: List<KSClassDeclaration>,
+        block: (List<KSClassDeclaration>, FileSpec.Builder, KSPLogger) -> MultiServiceVisitor
+    ) {
         val fileSpecBuilder = FileSpec.builder(
-            option.packageName + ".server",
-            "KTransportServerExt"
+            option.packageName + ".$packageSuffix",
+            filename
         )
-        val serverServiceVisitor = KTransportServiceVisitorJvm(
+        val visitor = block(
             kTransportServiceSymbols,
             fileSpecBuilder,
             logger
         )
 
-        serverServiceVisitor.buildCodeBlock()
+        visitor.commit()
         val fileSpec = fileSpecBuilder.build()
-        fileSpec.writeTo(codeGenerator.getJvmModuleDir())
+        fileSpec.writeTo(outputDir)
     }
 }

@@ -6,8 +6,6 @@ import com.google.devtools.ksp.isAnnotationPresent
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
-import com.google.devtools.ksp.symbol.KSTypeReference
-import com.google.devtools.ksp.symbol.KSVisitorVoid
 import com.jamshedalamqaderi.ktransport.api.KTransport
 import com.jamshedalamqaderi.ktransport.api.annotations.KTransportApi
 import com.jamshedalamqaderi.ktransport.api.annotations.KTransportStream
@@ -15,6 +13,8 @@ import com.jamshedalamqaderi.ktransport.api.enums.FunctionResponseType
 import com.jamshedalamqaderi.ktransport.api.models.ApiFunctionDescription
 import com.jamshedalamqaderi.ktransport.api.models.ServiceDescription
 import com.jamshedalamqaderi.ktransport.api.models.StreamFunctionDescription
+import com.jamshedalamqaderi.ktransport.ksp.ext.KSTypeReferenceExt.typeParamFormat
+import com.jamshedalamqaderi.ktransport.ksp.interfaces.MultiServiceVisitor
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FileSpec
@@ -23,13 +23,14 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.asTypeName
 
-class KTransportServiceVisitorJvm(
+class MultipleJvmServiceVisitor(
     private val classes: List<KSClassDeclaration>,
     private val fileSpecBuilder: FileSpec.Builder,
     private val logger: KSPLogger,
-) : KSVisitorVoid() {
+) : MultiServiceVisitor() {
     private val servicesListCodeBlockBuilder = CodeBlock.builder()
     private var singleServiceBuilder: CodeBlock.Builder? = null
+
     init {
         if (classes.isNotEmpty()) {
             fileSpecBuilder.addImport(
@@ -99,7 +100,7 @@ class KTransportServiceVisitorJvm(
         }
         singleServiceBuilder?.addStatement(",")
         singleServiceBuilder?.addStatement(
-            retrieveTypedReturnType(function.returnType!!)
+            function.returnType?.typeParamFormat()!!
         )
         singleServiceBuilder?.addStatement(">(")
         singleServiceBuilder?.addStatement("%S,", function.qualifiedName?.asString())
@@ -115,19 +116,8 @@ class KTransportServiceVisitorJvm(
         singleServiceBuilder?.addStatement("),")
     }
 
-    fun buildCodeBlock() {
+    override fun commit() {
         addServicesVariable(servicesListCodeBlockBuilder.build())
-    }
-
-    private fun retrieveTypedReturnType(typeReference: KSTypeReference): String {
-        if (typeReference.resolve().arguments.isEmpty()) {
-            return "${typeReference.resolve().declaration.qualifiedName?.asString()}"
-        } else {
-            return "${
-                typeReference.resolve().arguments.first()
-                    .type?.resolve()?.declaration?.qualifiedName?.asString()
-            }"
-        }
     }
 
     private fun addServicesVariable(codeBlock: CodeBlock) {
