@@ -10,9 +10,10 @@ import com.jamshedalamqaderi.ktransport.api.interfaces.BaseFunctionDescription
 import com.jamshedalamqaderi.ktransport.api.models.ServiceDescription
 import kotlinx.coroutines.flow.Flow
 
-class KTransportServiceImpl(private val services: List<ServiceDescription>) :
+class KTransportServiceServerImpl(private val services: List<ServiceDescription>) :
     KTransportServiceGrpcKt.KTransportServiceCoroutineImplBase() {
-    override suspend fun onRequestReceived(request: KTransportModel): KTransportModel {
+
+    override suspend fun apiRequest(request: KTransportModel): KTransportModel {
         if (request.reference.isEmpty()) {
             throw EmptyFunctionReferenceException("Empty api function reference found")
         }
@@ -23,7 +24,8 @@ class KTransportServiceImpl(private val services: List<ServiceDescription>) :
         return funInfo.second.executeFunction(funInfo.first, request.payload) as KTransportModel
     }
 
-    override fun onStreamReceived(request: KTransportModel): Flow<KTransportModel> {
+
+    override fun streamRequest(request: KTransportModel): Flow<KTransportModel> {
         if (request.reference.isEmpty()) {
             throw EmptyFunctionReferenceException("Empty stream function reference found")
         }

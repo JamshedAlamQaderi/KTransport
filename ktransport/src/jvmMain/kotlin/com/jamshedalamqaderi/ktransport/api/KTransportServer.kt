@@ -16,7 +16,7 @@ class KTransportServer private constructor(
 
     private val server: Server = ServerBuilder
         .forPort(serverPort)
-        .addService(KTransportServiceImpl(services))
+        .addService(KTransportServiceServerImpl(services))
         .build()
 
     fun start() {

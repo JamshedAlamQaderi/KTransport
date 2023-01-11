@@ -1,14 +1,17 @@
 package com.jamshedalamqaderi.ktransport.example
 
-import com.jamshedalamqaderi.ktransport.api.KTransport
-import com.jamshedalamqaderi.ktransport.api.KTransportServer
-import com.jamshedalamqaderi.ktransport.example.ksp.server.services
+import kotlin.reflect.KType
+import kotlin.reflect.full.createType
+import kotlin.reflect.typeOf
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
 
 fun main() {
-    KTransportServer
-        .createServer(16999, KTransport.services)
-        .start()
+//    KTransportServer
+//        .createServer(16999, KTransport.services)
+//        .start()
+
 }
 
 @Serializable

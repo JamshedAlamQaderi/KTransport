@@ -45,14 +45,14 @@ class KTransportProcessor(
     private fun visitAndSaveCommonModule(
         ksClassDeclaration: KSClassDeclaration,
         outputDir: File,
-        block: (FileSpec.Builder) -> KSVisitorVoid
+        block: (KSPLogger, FileSpec.Builder) -> KSVisitorVoid
     ) {
         val fileSpecBuilder =
             FileSpec.builder(
                 option.packageName + ".client",
                 ksClassDeclaration.simpleName.asString()
             )
-        val visitor = block(fileSpecBuilder)
+        val visitor = block(logger, fileSpecBuilder)
         ksClassDeclaration.accept(visitor, Unit)
         val fileSpec = fileSpecBuilder.build()
         fileSpec.writeTo(outputDir)

@@ -10,7 +10,7 @@ message KTransportModel {
 }
 
 service KTransportService {
-  rpc onRequestReceived (KTransportModel) returns (KTransportModel);
+  rpc apiRequest (KTransportModel) returns (KTransportModel);
 
-  rpc onStreamReceived(KTransportModel) returns (stream KTransportModel);
+  rpc streamRequest (KTransportModel) returns (stream KTransportModel);
 }
