@@ -24,7 +24,7 @@ class KTransportProcessor(
 ) : SymbolProcessor {
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
-        codeGenerator.cleanAll()
+//        codeGenerator.cleanAll()
 
         val kTransportServiceSymbols =
             resolver.getSymbolsWithAnnotation(KTransportService::class.qualifiedName!!)

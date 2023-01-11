@@ -11,8 +11,9 @@ import kotlinx.coroutines.flow.flow
 class TaskService {
 
     @KTransportApi
-    fun createTask(task: Task): Boolean {
-        return true
+    fun createTask(task: Task): Task {
+        println("Received task: $task")
+        return Task(taskId = 232, "Hello, ${task.name}")
     }
 
     @KTransportStream

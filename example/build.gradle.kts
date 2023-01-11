@@ -41,5 +41,9 @@ dependencies {
 }
 
 
+tasks.withType(KspTaskJvm::class){
+    dependsOn("clean")
+}
+
 
 

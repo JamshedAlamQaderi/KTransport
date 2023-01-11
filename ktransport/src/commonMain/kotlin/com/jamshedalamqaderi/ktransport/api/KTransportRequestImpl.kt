@@ -21,6 +21,7 @@ suspend fun <I, R> makeApiRequest(
     }
     val serviceStub = getServiceStub()
     val response = serviceStub.apiRequest(requestPayload)
+    println("Response: ${response.payload}")
     return Json.decodeFromString(
         Json.serializersModule.serializer(returnType),
         response.payload
