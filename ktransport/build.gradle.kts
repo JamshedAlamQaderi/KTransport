@@ -41,7 +41,7 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                implementation(project(":grpc-common"))
+                implementation(project(":generate-proto"))
                 implementation("io.grpc:grpc-netty-shaded:$grpcVersion")
                 implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
             }

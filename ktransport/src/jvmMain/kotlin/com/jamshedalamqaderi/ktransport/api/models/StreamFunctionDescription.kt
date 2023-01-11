@@ -4,9 +4,9 @@ import com.jamshedalamqaderi.grpc.protos.KTransportModel
 import com.jamshedalamqaderi.grpc.protos.kTransportModel
 import com.jamshedalamqaderi.ktransport.api.enums.FunctionResponseType
 import com.jamshedalamqaderi.ktransport.api.interfaces.BaseFunctionDescription
-import kotlin.reflect.KFunction
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlin.reflect.KFunction
 
 
 data class StreamFunctionDescription<InputType, ReturnType>(
@@ -26,8 +26,12 @@ data class StreamFunctionDescription<InputType, ReturnType>(
     }
 
     override fun executeFunction(serviceInstance: Any, input: String): Flow<KTransportModel> {
-        val returnData = functionRef
-            .call(serviceInstance, inputConverter(input))
+
+        val returnData = if (input == "Unit") {
+            functionRef.call(serviceInstance)
+        } else {
+            functionRef.call(serviceInstance, inputConverter(input))
+        }
         return returnData.map {
             kTransportModel {
                 reference = funQualifiedName

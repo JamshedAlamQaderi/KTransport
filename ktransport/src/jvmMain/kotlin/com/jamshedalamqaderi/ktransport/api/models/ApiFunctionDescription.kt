@@ -22,7 +22,14 @@ data class ApiFunctionDescription<InputType, ReturnType>(
     }
 
     override fun executeFunction(serviceInstance: Any, input: String): KTransportModel {
-        val returnData = functionRef.call(serviceInstance, inputConverter(input))
+        val returnData = if (input == "Unit") {
+            functionRef.call(serviceInstance)
+        } else {
+            functionRef.call(
+                serviceInstance,
+                inputConverter(input)
+            )
+        }
         return kTransportModel {
             reference = funQualifiedName
             payload = returnTypeConverter.invoke(returnData)

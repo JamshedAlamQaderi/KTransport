@@ -27,8 +27,8 @@ kotlin {
             }
             kotlin.srcDir(projectDir.resolve("build/generated/ktransport/metadata/commonMain/kotlin/"))
         }
-        val jvmMain by getting{
-            dependencies{
+        val jvmMain by getting {
+            dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
             }
             kotlin.srcDir(projectDir.resolve("build/generated/ktransport/jvm/jvmMain/kotlin/"))
@@ -41,7 +41,7 @@ dependencies {
 }
 
 
-tasks.withType(KspTaskJvm::class){
+tasks.withType(KspTaskJvm::class) {
     dependsOn("clean")
 }
 

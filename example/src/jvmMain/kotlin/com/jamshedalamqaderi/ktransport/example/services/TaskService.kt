@@ -16,6 +16,16 @@ class TaskService {
         return Task(taskId = 232, "Hello, ${task.name}")
     }
 
+    @KTransportApi
+    fun createId(): Task {
+        return Task(232, "Id created")
+    }
+
+    @KTransportApi
+    fun createMoreTaskId() {
+        println("More task id created")
+    }
+
     @KTransportStream
     fun onTaskCreated(forTaskId: Int): Flow<Task> = flow {
         repeat(10) {

@@ -100,7 +100,7 @@ class IndividualCommonServiceVisitor(
             .add(returnType)
             .add(">")
             .add("(")
-            .add("\"\${this::class.qualifiedName}.\${this::${function.simpleName.asString()}.name}\",")
+            .add("\"${function.qualifiedName?.asString()}\",")
             .add("$inputValue,")
             .add("typeOf<${inputType}>(),")
             .add("typeOf<${returnType}>(),")
