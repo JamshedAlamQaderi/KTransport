@@ -12,18 +12,12 @@ class TaskService {
 
     @KTransportApi
     fun createTask(task: Task): Task {
-        println("Received task: $task")
         return Task(taskId = 232, "Hello, ${task.name}")
     }
 
     @KTransportApi
     fun createId(): Task {
         return Task(232, "Id created")
-    }
-
-    @KTransportApi
-    fun createMoreTaskId() {
-        println("More task id created")
     }
 
     @KTransportStream

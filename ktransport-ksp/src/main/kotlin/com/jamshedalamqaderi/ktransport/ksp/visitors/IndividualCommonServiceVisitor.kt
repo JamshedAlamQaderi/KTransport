@@ -10,14 +10,9 @@ import com.google.devtools.ksp.symbol.KSTypeReference
 import com.google.devtools.ksp.symbol.KSVisitorVoid
 import com.jamshedalamqaderi.ktransport.api.annotations.KTransportApi
 import com.jamshedalamqaderi.ktransport.api.annotations.KTransportStream
+import com.jamshedalamqaderi.ktransport.api.enums.FunctionResponseType
 import com.jamshedalamqaderi.ktransport.ksp.ext.KSTypeReferenceExt.typeParamFormat
-import com.squareup.kotlinpoet.ClassName
-import com.squareup.kotlinpoet.CodeBlock
-import com.squareup.kotlinpoet.FileSpec
-import com.squareup.kotlinpoet.FunSpec
-import com.squareup.kotlinpoet.KModifier
-import com.squareup.kotlinpoet.PropertySpec
-import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ksp.toTypeName
 
 class IndividualCommonServiceVisitor(
@@ -81,20 +76,26 @@ class IndividualCommonServiceVisitor(
         typeSpecBuilder.addFunction(funSpec.build())
     }
 
+    @OptIn(KspExperimental::class)
     private fun generateRequestCodeBlock(function: KSFunctionDeclaration): CodeBlock {
+        val functionResponseType = if (function.isAnnotationPresent(KTransportStream::class)) {
+            FunctionResponseType.STREAM
+        } else {
+            FunctionResponseType.API
+        }
         val inputType = if (function.parameters.isEmpty()) {
             "Unit"
         } else {
             function.parameters.first().type.resolve().declaration.qualifiedName?.asString()
         }
-        val returnType = formatTypeWithParam(function.returnType!!)
+        val returnType = function.returnType?.typeParamFormat()!!
         val inputValue = if (function.parameters.isEmpty()) {
             "Unit"
         } else {
             function.parameters.first().name?.asString()
         }
         return CodeBlock.builder()
-            .add("makeApiRequest")
+            .add(if (functionResponseType == FunctionResponseType.STREAM) "makeStreamRequest" else "makeApiRequest")
             .add("<")
             .add("$inputType,")
             .add(returnType)

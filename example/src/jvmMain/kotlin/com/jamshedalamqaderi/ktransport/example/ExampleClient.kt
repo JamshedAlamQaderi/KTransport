@@ -10,7 +10,7 @@ fun main() {
     runBlocking {
         KTransport.setConfig("localhost", 16999)
         val response = KTransport.taskService.createMoreTaskId()
-        println("Received client: $response")
+        println("Response: $response")
     }
 }
 

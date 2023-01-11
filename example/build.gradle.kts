@@ -29,7 +29,7 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+//                implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
             }
             kotlin.srcDir(projectDir.resolve("build/generated/ktransport/jvm/jvmMain/kotlin/"))
         }

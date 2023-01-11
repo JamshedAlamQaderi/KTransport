@@ -12,12 +12,8 @@ import kotlin.reflect.KType
 import kotlin.reflect.typeOf
 
 fun main() {
-//    KTransportServer
-//        .createServer(16999, KTransport.services)
-//        .start()
-    println(encodeUnit(typeOf<Unit>(), "{}"))
-}
+    KTransportServer
+        .createServer(16999, KTransport.services)
+        .start()
 
-fun <I> encodeUnit(type:KType, data:String): I? {
-    return Json.decodeFromString(Json.serializersModule.serializer(type), data) as I
 }
