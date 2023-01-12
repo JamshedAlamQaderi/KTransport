@@ -7,7 +7,7 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 
 concurrency:
-  group: 'tawra-ktor-api-publish'
+  group: 'ktransport-publish'
   cancel-in-progress: true
 
 jobs:
