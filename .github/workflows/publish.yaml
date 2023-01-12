@@ -1,0 +1,37 @@
+name: 'Publish to Maven Central'
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+-dev-[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+concurrency:
+  group: 'tawra-ktor-api-publish'
+  cancel-in-progress: true
+
+jobs:
+  Publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup JAVA 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          check-latest: true
+          cache: 'gradle'
+      - name: Publish library to maven central
+        run: ./gradlew publishToMavenCentral
+        env:
+          ORG_GRADLE_PROJECT_projectVersion: ${{ github.ref_name }}
+          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSWORD }}
+      - name: Publish gradle plugin to GradlePluginPortal
+        run: ./gradlew publishToGradlePluginPortal -Pgradle.publish.key=${{ secrets.GRADLE_KEY }} -Pgradle.publish.secret=${{secrets.GRADLE_SECRET}}
+        env:
+          ORG_GRADLE_PROJECT_projectVersion: ${{ github.ref_name }}
