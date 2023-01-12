@@ -8,7 +8,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotlin.reflect.KType
 
-
 suspend fun <I, R> makeApiRequest(
     reference: String,
     model: I,

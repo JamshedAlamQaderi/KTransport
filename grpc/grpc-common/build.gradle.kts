@@ -8,8 +8,7 @@ plugins {
 val grpcMPLibVersion: String by project
 val coroutineVersion: String by project
 
-
-dependencies{
+dependencies {
     commonMainApi("com.github.TimOrtel.GRPC-Kotlin-Multiplatform:grpc-multiplatform-lib:$grpcMPLibVersion")
 }
 
@@ -45,4 +44,10 @@ kotlin {
 }
 tasks.register<GenerateMultiplatformSourcesTask>("generateMPProtos") {
     protoSourceFolders.set(listOf(projectDir.resolve("../protos/src/main/proto")))
+}
+
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    filter {
+        exclude { projectDir.toURI().relativize(it.file.toURI()).path.contains("/generated/") }
+    }
 }

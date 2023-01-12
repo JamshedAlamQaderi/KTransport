@@ -12,7 +12,13 @@ import com.jamshedalamqaderi.ktransport.api.annotations.KTransportApi
 import com.jamshedalamqaderi.ktransport.api.annotations.KTransportStream
 import com.jamshedalamqaderi.ktransport.api.enums.FunctionResponseType
 import com.jamshedalamqaderi.ktransport.ksp.ext.KSTypeReferenceExt.typeParamFormat
-import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.CodeBlock
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.ksp.toTypeName
 
 class IndividualCommonServiceVisitor(
@@ -43,7 +49,8 @@ class IndividualCommonServiceVisitor(
                 TypeSpec.companionObjectBuilder()
                     .addProperty(
                         PropertySpec.builder(
-                            "INSTANCE", ClassName(
+                            "INSTANCE",
+                            ClassName(
                                 "",
                                 classDeclaration.simpleName.asString()
                             )
@@ -54,10 +61,9 @@ class IndividualCommonServiceVisitor(
                     .build()
             )
 
-
         classDeclaration.getDeclaredFunctions().filter {
-            it.isAnnotationPresent(KTransportApi::class)
-                    || it.isAnnotationPresent(KTransportStream::class)
+            it.isAnnotationPresent(KTransportApi::class) ||
+                it.isAnnotationPresent(KTransportStream::class)
         }.forEach {
             visitFunctionDeclaration(it, Unit)
         }
@@ -68,7 +74,7 @@ class IndividualCommonServiceVisitor(
         val funSpec = FunSpec.builder(function.simpleName.asString())
             .returns(function.returnType?.toTypeName()!!)
             .addModifiers(KModifier.SUSPEND)
-            .addCode("return ${generateRequestCodeBlock(function).toString()}")
+            .addCode("return ${generateRequestCodeBlock(function)}")
         if (function.parameters.isNotEmpty()) {
             val firstParam = function.parameters.first()
             funSpec.addParameter("${firstParam.name?.asString()}", firstParam.type.toTypeName())
@@ -103,8 +109,8 @@ class IndividualCommonServiceVisitor(
             .add("(")
             .add("\"${function.qualifiedName?.asString()}\",")
             .add("$inputValue,")
-            .add("typeOf<${inputType}>(),")
-            .add("typeOf<${returnType}>(),")
+            .add("typeOf<$inputType>(),")
+            .add("typeOf<$returnType>(),")
             .add(")")
             .build()
     }

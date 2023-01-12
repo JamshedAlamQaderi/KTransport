@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlin.reflect.KFunction
 
-
 data class StreamFunctionDescription<InputType, ReturnType>(
     val funQualifiedName: String,
     val funResponseType: FunctionResponseType,
@@ -21,8 +20,10 @@ data class StreamFunctionDescription<InputType, ReturnType>(
         functionReference: String,
         functionResponseType: FunctionResponseType
     ): Boolean {
-        return (funQualifiedName == functionReference
-                && functionResponseType == funResponseType)
+        return (
+            funQualifiedName == functionReference &&
+                functionResponseType == funResponseType
+            )
     }
 
     override fun executeFunction(serviceInstance: Any, input: String): Flow<KTransportModel> {
@@ -39,5 +40,4 @@ data class StreamFunctionDescription<InputType, ReturnType>(
             }
         }
     }
-
 }

@@ -17,8 +17,10 @@ data class ApiFunctionDescription<InputType, ReturnType>(
         functionReference: String,
         functionResponseType: FunctionResponseType
     ): Boolean {
-        return (funQualifiedName == functionReference
-                && functionResponseType == funResponseType)
+        return (
+            funQualifiedName == functionReference &&
+                functionResponseType == funResponseType
+            )
     }
 
     override fun executeFunction(serviceInstance: Any, input: String): KTransportModel {

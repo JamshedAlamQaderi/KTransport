@@ -56,7 +56,6 @@ class KTransportProcessor(
         return emptyList()
     }
 
-
     private fun visitIndividualServices(
         ksClassDeclaration: KSClassDeclaration,
         outputDir: File,

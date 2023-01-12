@@ -40,10 +40,6 @@ dependencies {
     add("kspJvm", project(":ktransport-ksp"))
 }
 
-
 tasks.withType(KspTaskJvm::class) {
     dependsOn("clean")
 }
-
-
-

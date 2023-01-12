@@ -14,11 +14,12 @@ pluginManagement {
         id("com.google.protobuf") version "0.8.18"
         id("io.github.timortel.kotlin-multiplatform-grpc-plugin") version "0.1.1"
         id("com.google.devtools.ksp") version extra["kspVersion"] as String
+        id("org.jlleitschuh.gradle.ktlint") version extra["ktlintVersion"] as String
     }
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         mavenCentral()
         google()
@@ -28,6 +29,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "ktransport-project"
 
+include(":ktransport", ":ktransport-ksp", ":example")
+
 file("./grpc")
     .listFiles()
     ?.filter { it.isDirectory }
@@ -35,4 +38,3 @@ file("./grpc")
         include(":${dir.name}")
         project(":${dir.name}").projectDir = dir.absoluteFile
     }
-include(":ktransport", ":ktransport-ksp", ":example")

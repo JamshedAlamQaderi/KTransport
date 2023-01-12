@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.Flow
 class KTransportServiceServerImpl(private val services: List<ServiceDescription>) :
     KTransportServiceGrpcKt.KTransportServiceCoroutineImplBase() {
 
-
     override suspend fun apiRequest(request: KTransportModel): KTransportModel {
         println("Received apiRequest: (${request.reference}, ${request.payload})")
         if (request.reference.isEmpty()) {
@@ -25,7 +24,6 @@ class KTransportServiceServerImpl(private val services: List<ServiceDescription>
         ) ?: return kTransportModel { }
         return funInfo.second.executeFunction(funInfo.first, request.payload) as KTransportModel
     }
-
 
     override fun streamRequest(request: KTransportModel): Flow<KTransportModel> {
         println("Received streamRequest: (${request.reference}, ${request.payload})")

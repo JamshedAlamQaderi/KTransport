@@ -15,13 +15,9 @@ kotlin {
         }
     }
     js(IR) {
-        useCommonJs()
         browser {
-            webpackTask {
-                output.libraryTarget = "commonjs2"
-            }
+            webpackTask {}
         }
-        binaries.executable()
     }
 
     sourceSets {
@@ -41,7 +37,6 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                implementation(project(":generate-proto"))
                 implementation("io.grpc:grpc-netty-shaded:$grpcVersion")
                 implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
             }
@@ -49,13 +44,14 @@ kotlin {
 
         val jvmTest by getting {
             dependencies {
-
             }
         }
 
         val jsMain by getting {
             dependencies {
-
+                implementation(npm("google-protobuf", "^3.19.1"))
+                implementation(npm("grpc-web", "^1.3.0"))
+                implementation(npm("protobufjs", "^6.11.2"))
             }
         }
 
@@ -64,6 +60,5 @@ kotlin {
                 implementation(kotlin("test-js"))
             }
         }
-
     }
 }

@@ -54,8 +54,8 @@ class MultipleJvmServiceVisitor(
             ServiceDescription::class,
         )
         val ktransportFunctions = classDeclaration.getDeclaredFunctions().filter {
-            it.isAnnotationPresent(KTransportApi::class)
-                    || it.isAnnotationPresent(KTransportStream::class)
+            it.isAnnotationPresent(KTransportApi::class) ||
+                it.isAnnotationPresent(KTransportStream::class)
         }.toList()
         singleServiceBuilder?.addStatement("listOf(")
         ktransportFunctions.forEach {
@@ -91,8 +91,8 @@ class MultipleJvmServiceVisitor(
         if (function.parameters.isNotEmpty()) {
             singleServiceBuilder?.addStatement(
                 "${
-                    function.parameters
-                        .first().type.resolve().declaration.qualifiedName?.asString()
+                function.parameters
+                    .first().type.resolve().declaration.qualifiedName?.asString()
                 }"
             )
         } else {
@@ -107,8 +107,8 @@ class MultipleJvmServiceVisitor(
         singleServiceBuilder?.addStatement("${FunctionResponseType::class.qualifiedName}.${functionResponseType.name},")
         singleServiceBuilder?.addStatement(
             "${
-                function.parentDeclaration
-                    ?.qualifiedName?.asString()
+            function.parentDeclaration
+                ?.qualifiedName?.asString()
             }::${function.simpleName.asString()},"
         )
         singleServiceBuilder?.addStatement("Json.Default::decodeFromString,")
@@ -132,7 +132,7 @@ class MultipleJvmServiceVisitor(
                 .receiver(KTransport::class)
                 .getter(
                     FunSpec.getterBuilder()
-                        .addStatement("return ${codeBlock.toString()}")
+                        .addStatement("return $codeBlock")
                         .build()
                 )
                 .build()

@@ -8,8 +8,8 @@ object KSTypeReferenceExt {
             "${resolve().declaration.qualifiedName?.asString()}"
         } else {
             "${
-                resolve().arguments.first()
-                    .type?.resolve()?.declaration?.qualifiedName?.asString()
+            resolve().arguments.first()
+                .type?.resolve()?.declaration?.qualifiedName?.asString()
             }"
         }
     }
