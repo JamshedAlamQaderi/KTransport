@@ -15,6 +15,7 @@ pluginManagement {
         id("io.github.timortel.kotlin-multiplatform-grpc-plugin") version "0.1.1"
         id("com.google.devtools.ksp") version extra["kspVersion"] as String
         id("org.jlleitschuh.gradle.ktlint") version extra["ktlintVersion"] as String
+        id("org.jetbrains.kotlinx.kover") version extra["koverVersion"] as String
     }
 }
 
