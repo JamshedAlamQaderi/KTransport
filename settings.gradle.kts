@@ -16,6 +16,7 @@ pluginManagement {
         id("com.google.devtools.ksp") version extra["kspVersion"] as String
         id("org.jlleitschuh.gradle.ktlint") version extra["ktlintVersion"] as String
         id("org.jetbrains.kotlinx.kover") version extra["koverVersion"] as String
+        id("com.vanniktech.maven.publish") version extra["publishVersion"] as String
     }
 }
 

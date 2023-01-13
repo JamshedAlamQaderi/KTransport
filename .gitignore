@@ -14,3 +14,5 @@ ios.xcworkspace/
 
 .DS_Store
 .externalNativeBuild
+
+secrets
