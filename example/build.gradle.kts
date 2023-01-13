@@ -28,9 +28,7 @@ kotlin {
             kotlin.srcDir(projectDir.resolve("build/generated/ktransport/metadata/commonMain/kotlin/"))
         }
         val jvmMain by getting {
-            dependencies {
-//                implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
-            }
+            dependencies {}
             kotlin.srcDir(projectDir.resolve("build/generated/ktransport/jvm/jvmMain/kotlin/"))
         }
     }
