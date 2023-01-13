@@ -13,6 +13,7 @@ dependencies {
     implementation("com.squareup:kotlinpoet:$kotlinPoetVersion")
     implementation("com.squareup:kotlinpoet-ksp:$kotlinPoetVersion")
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+    testImplementation(kotlin("test"))
 }
 
 mavenPublishing {
