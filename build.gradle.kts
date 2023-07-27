@@ -14,7 +14,7 @@ val projectVersion: String? by project
 
 allprojects {
 
-    group = "com.jamshedalamqaderi.ktransport"
+    group = "com.jamshedalamqaderi"
 
     version = projectVersion?.replaceFirst("v", "", ignoreCase = true) ?: "0.0.1-SNAPSHOT"
 
