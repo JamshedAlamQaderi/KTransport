@@ -5,7 +5,7 @@ plugins {
 }
 
 ktransport {
-    packageName.set("com.jamshedalamqaderi.ktransport.example.ksp")
+    packageName = "com.jamshedalamqaderi.ktransport.example.ksp"
 }
 
 val kotlinxSerializationVersion: String by project

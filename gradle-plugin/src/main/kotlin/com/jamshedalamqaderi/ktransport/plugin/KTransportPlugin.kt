@@ -11,7 +11,7 @@ class KTransportPlugin : Plugin<Project> {
         KTransportDeps.projectVersion = project.findProperty("projectVersion")?.toString() ?: "0.0.1-SNAPSHOT"
 
         val extension = project.extensions.create<KTransportPluginExtension>("ktransport")
-        extension.packageName.convention("ktransport")
+
         if (!project.plugins.hasPlugin("com.google.devtools.ksp")) {
             project.pluginManager.apply("com.google.devtools.ksp")
         }
@@ -20,9 +20,9 @@ class KTransportPlugin : Plugin<Project> {
             project.configure<KspExtension> {
                 arg(
                     "buildDir",
-                    project.buildDir.absolutePath
+                    extension.outputBuildDir ?: project.buildDir.absolutePath
                 )
-                arg("packageName", extension.packageName.get())
+                arg("packageName", extension.packageName ?: "ktransport")
             }
 
             dependencies.add("kspJvm", KTransportDeps.ksp)
