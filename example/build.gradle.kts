@@ -14,7 +14,7 @@ val kotlinVersion: String by project
 
 kotlin {
     jvm()
-    js{
+    js(IR) {
         browser()
         binaries.executable()
     }
