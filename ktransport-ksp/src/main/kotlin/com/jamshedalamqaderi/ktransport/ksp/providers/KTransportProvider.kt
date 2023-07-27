@@ -12,7 +12,7 @@ class KTransportProvider : SymbolProcessorProvider {
         return KTransportProcessor(
             KTransportOption(environment.options),
             environment.logger,
-            KTransportCodeGeneratorImpl(environment.options["buildDir"]!!, environment.logger)
+            KTransportCodeGeneratorImpl(environment.options["buildDir"] ?: "./", environment.logger)
         )
     }
 }

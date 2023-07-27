@@ -32,8 +32,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "ktransport-project"
 
+include(":example")
 includeBuild("./gradle-plugin")
-include(":ktransport", ":ktransport-ksp", ":example")
+include(":ktransport", ":ktransport-ksp")
 
 file("./grpc")
     .listFiles()
