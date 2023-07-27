@@ -1,7 +1,9 @@
+import com.jamshedalamqaderi.ktransport.plugin.KTransportDeps
+
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
-    id("com.jamshedalamqaderi.ktransport.gradle-plugin")
+    id("com.jamshedalamqaderi.ktransport.gradle-plugin") version "0.0.1-dev-11"
 }
 
 ktransport {
