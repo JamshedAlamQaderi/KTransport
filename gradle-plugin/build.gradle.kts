@@ -27,9 +27,9 @@ pluginBundle {
 
 gradlePlugin {
     plugins {
-        create("ktrasport-plugin") {
+        create("ktransport-plugin") {
             id = "com.jamshedalamqaderi.ktransport.gradle-plugin"
-            implementationClass = "com.jamshedalamqaderi.ktransport.plugin.KTransportPlugin"
+            implementationClass = "com.jamshedalamqaderi.ktransport.plugin.KTransportPluginKt"
             displayName = "KTransport Plugin"
             description =
                 "A plugin for ktransport library which generate client side code for grpc server"

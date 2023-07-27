@@ -4,12 +4,12 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("com.google.devtools.ksp")
-    id("com.jamshedalamqaderi.ktransport.gradle-plugin")
+//    id("com.jamshedalamqaderi.ktransport.gradle-plugin")
 }
 
-ktransport {
-    packageName.set("com.jamshedalamqaderi.ktransport.example.ksp")
-}
+// ktransport {
+//    packageName.set("com.jamshedalamqaderi.ktransport.example.ksp")
+// }
 
 val kotlinxSerializationVersion: String by project
 val coroutineVersion: String by project
