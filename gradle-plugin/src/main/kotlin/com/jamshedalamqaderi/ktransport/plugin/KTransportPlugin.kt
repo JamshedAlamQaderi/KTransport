@@ -32,6 +32,9 @@ class KTransportPlugin : Plugin<Project> {
             kotlinSourceSets.getByName("commonMain") {
                 kotlin.srcDir(commonMainOutputDir(this@afterEvaluate))
             }
+            kotlinSourceSets.getByName("jvmMain") {
+                kotlin.srcDir(jvmMainOutputDir(this@afterEvaluate))
+            }
         }
 
         project.tasks.register("generateApi") {
@@ -57,5 +60,9 @@ class KTransportPlugin : Plugin<Project> {
 
     private fun commonMainOutputDir(project: Project): String {
         return "${project.buildDir}/generated/ktransport/metadata/commonMain/kotlin/"
+    }
+
+    private fun jvmMainOutputDir(project: Project): String {
+        return "${project.buildDir}/generated/ktransport/jvm/jvmMain/kotlin/"
     }
 }
