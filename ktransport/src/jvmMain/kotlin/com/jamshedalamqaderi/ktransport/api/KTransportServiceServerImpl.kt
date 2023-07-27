@@ -14,7 +14,6 @@ class KTransportServiceServerImpl(private val services: List<ServiceDescription>
     KTransportServiceGrpcKt.KTransportServiceCoroutineImplBase() {
 
     override suspend fun apiRequest(request: KTransportModel): KTransportModel {
-        println("Received apiRequest: (${request.reference}, ${request.payload})")
         if (request.reference.isEmpty()) {
             throw EmptyFunctionReferenceException("Empty api function reference found")
         }
@@ -26,7 +25,6 @@ class KTransportServiceServerImpl(private val services: List<ServiceDescription>
     }
 
     override fun streamRequest(request: KTransportModel): Flow<KTransportModel> {
-        println("Received streamRequest: (${request.reference}, ${request.payload})")
         if (request.reference.isEmpty()) {
             throw EmptyFunctionReferenceException("Empty stream function reference found")
         }
