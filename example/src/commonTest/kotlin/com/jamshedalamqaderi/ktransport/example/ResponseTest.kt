@@ -1,11 +1,11 @@
 package com.jamshedalamqaderi.ktransport.example
 
 import com.jamshedalamqader.ktransport.example.models.Response
-import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 class ResponseTest {
 
