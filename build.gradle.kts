@@ -8,6 +8,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint")
     id("org.jetbrains.kotlinx.kover")
     id("com.vanniktech.maven.publish") apply false
+    id("com.android.library") apply false
 }
 
 val projectVersion: String? by project

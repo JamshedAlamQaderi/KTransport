@@ -4,7 +4,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("com.google.devtools.ksp")
-//    id("com.jamshedalamqaderi.ktransport.gradle-plugin")
+//    id("com.jamshedalamqaderi.ktransport.gradle-plugin") version "0.0.1-dev-9"
 }
 
 // ktransport {
