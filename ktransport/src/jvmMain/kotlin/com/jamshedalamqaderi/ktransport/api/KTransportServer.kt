@@ -6,7 +6,7 @@ import io.grpc.ServerBuilder
 
 class KTransportServer private constructor(
     serverPort: Int,
-    private val services: List<ServiceDescription>
+    services: List<ServiceDescription>
 ) {
     companion object {
         fun createServer(serverPort: Int, services: List<ServiceDescription>): KTransportServer {

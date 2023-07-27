@@ -27,7 +27,11 @@ jobs:
         run: ./gradlew :ktransport:publish :ktransport-ksp:publish
         env:
           ORG_GRADLE_PROJECT_projectVersion: ${{ github.ref_name }}
-          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
-          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_PASSWORD }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSWORD }}
+      - name: Publish gradle plugin to GradlePluginPortal
+        run: ./gradlew publishToGradlePluginPortal -Pgradle.publish.key=${{ secrets.GRADLE_KEY }} -Pgradle.publish.secret=${{secrets.GRADLE_SECRET}}
+        env:
+          ORG_GRADLE_PROJECT_projectVersion: ${{ github.ref_name }}

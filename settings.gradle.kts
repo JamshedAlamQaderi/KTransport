@@ -31,6 +31,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "ktransport-project"
 
+includeBuild("./gradle-plugin")
 include(":ktransport", ":ktransport-ksp", ":example")
 
 file("./grpc")

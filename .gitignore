@@ -16,3 +16,5 @@ ios.xcworkspace/
 .externalNativeBuild
 
 secrets
+
+ktransport-private-key.asc
