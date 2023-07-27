@@ -3,7 +3,6 @@ package com.jamshedalamqaderi.ktransport.example
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-
 class Example {
 
     @Test
