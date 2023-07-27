@@ -1,15 +1,12 @@
-import com.google.devtools.ksp.gradle.KspTaskJvm
-
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
-    id("com.google.devtools.ksp")
-//    id("com.jamshedalamqaderi.ktransport.gradle-plugin") version "0.0.1-dev-9"
+    id("com.jamshedalamqaderi.ktransport.gradle-plugin")
 }
 
-// ktransport {
-//    packageName.set("com.jamshedalamqaderi.ktransport.example.ksp")
-// }
+ktransport {
+    packageName.set("com.jamshedalamqaderi.ktransport.example.ksp")
+}
 
 val kotlinxSerializationVersion: String by project
 val coroutineVersion: String by project
@@ -35,12 +32,4 @@ kotlin {
             dependencies {}
         }
     }
-}
-
-dependencies {
-    add("kspJvm", project(":ktransport-ksp"))
-}
-
-tasks.withType(KspTaskJvm::class) {
-    dependsOn("clean")
 }

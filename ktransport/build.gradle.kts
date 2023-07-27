@@ -20,7 +20,12 @@ android {
 }
 
 kotlin {
-    android()
+    android {
+        compilations.all {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+        publishLibraryVariants("release")
+    }
     jvm {
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
