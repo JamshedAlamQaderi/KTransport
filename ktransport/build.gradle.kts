@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("com.vanniktech.maven.publish")
+    id("com.android.library")
 }
 
 val kotlinxSerializationVersion: String by project
@@ -9,7 +10,17 @@ val grpcVersion: String by project
 val coroutineVersion: String by project
 val kotlinVersion: String by project
 
+android {
+    compileSdk = 33
+    sourceSets["main"].manifest.srcFile("${project.projectDir}/src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = 21
+        targetSdk = 33
+    }
+}
+
 kotlin {
+    android()
     jvm {
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
@@ -20,7 +31,6 @@ kotlin {
             webpackTask {}
         }
     }
-
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -60,6 +70,9 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-js"))
             }
+        }
+        val androidMain by getting {
+            dependsOn(jvmMain)
         }
     }
 }
