@@ -22,7 +22,6 @@ allprojects {
     apply(plugin = "org.jetbrains.kotlinx.kover")
 }
 
-
 tasks.register("publishToGradlePluginPortal") {
     dependsOn(gradle.includedBuild("gradle-plugin").task(":publishPlugins"))
 }
