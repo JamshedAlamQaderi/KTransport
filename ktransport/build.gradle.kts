@@ -91,5 +91,5 @@ mavenPublishing {
         }
     }
     signAllPublications()
-    publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.S01, true)
+    publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.S01)
 }
