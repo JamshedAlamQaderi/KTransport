@@ -8,12 +8,12 @@ plugins {
 }
 val projectVersion: String? by project
 
-group = "com.jamshedalamqaderi"
+group = "com.jamshedalamqaderi.ktransport"
 version = projectVersion?.replaceFirst("v", "") ?: "0.0.1-SNAPSHOT"
 
 pluginBundle {
     website = "https://jamshedalamqaderi.com"
-    vcsUrl = "https://github.com/JamshedAlamQaderi/ktransport"
+    vcsUrl = "https://github.com/JamshedAlamQaderi/KTransport"
     tags = listOf(
         "grpc",
         "grpc-server",
@@ -28,8 +28,8 @@ pluginBundle {
 gradlePlugin {
     plugins {
         create("ktrasport-plugin") {
-            id = "com.jamshedalamqaderi.ktransport-plugin"
-            implementationClass = "com.jamshedalamqaderi.ktransport.TawraKtorApiPlugin"
+            id = "com.jamshedalamqaderi.ktransport.gradle-plugin"
+            implementationClass = "com.jamshedalamqaderi.ktransport.plugin.KTransportPlugin"
             displayName = "KTransport Plugin"
             description =
                 "A plugin for ktransport library which generate client side code for grpc server"

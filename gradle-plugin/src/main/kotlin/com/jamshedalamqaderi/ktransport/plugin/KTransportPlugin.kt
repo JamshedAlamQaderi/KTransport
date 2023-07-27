@@ -8,10 +8,13 @@ import org.gradle.kotlin.dsl.create
 
 class KTransportPlugin : Plugin<Project> {
     override fun apply(project: Project) {
+        KTransportDeps.projectVersion = project.findProperty("projectVersion")?.toString() ?: "0.0.1-SNAPSHOT"
+
         val extension = project.extensions.create<KTransportPluginExtension>("ktransport")
         extension.packageName.convention("ktransport")
-
-        project.pluginManager.apply("com.google.devtools.ksp")
+        if (!project.plugins.hasPlugin("com.google.devtools.ksp")) {
+            project.pluginManager.apply("com.google.devtools.ksp")
+        }
 
         project.afterEvaluate {
             project.configure<KspExtension> {

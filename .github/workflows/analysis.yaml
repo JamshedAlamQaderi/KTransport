@@ -27,5 +27,5 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./ktransport/build/reports/kover/xml/report.xml,./ktransport-ksp/build/reports/kover/xml/report.xml,./example/build/reports/kover/xml/report.xml
+          files: ./ktransport/build/reports/kover/xml/report.xml,./ktransport-ksp/build/reports/kover/xml/report.xml,./example/build/reports/kover/xml/report.xml,./gradle-plugin/build/reports/kover/xml/report.xml
           fail_ci_if_error: true

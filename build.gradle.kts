@@ -15,8 +15,14 @@ val projectVersion: String? by project
 allprojects {
 
     group = "com.jamshedalamqaderi.ktransport"
+
     version = projectVersion?.replaceFirst("v", "", ignoreCase = true) ?: "0.0.1-SNAPSHOT"
 
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(plugin = "org.jetbrains.kotlinx.kover")
+}
+
+
+tasks.register("publishToGradlePluginPortal") {
+    dependsOn(gradle.includedBuild("gradle-plugin").task(":publishPlugins"))
 }
