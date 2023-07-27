@@ -27,8 +27,8 @@ kotlin {
             }
             kotlin.srcDir(projectDir.resolve("build/generated/ktransport/metadata/commonMain/kotlin/"))
         }
-        val commonTest by getting{
-            dependencies{
+        val commonTest by getting {
+            dependencies {
                 implementation(kotlin("test"))
             }
         }
