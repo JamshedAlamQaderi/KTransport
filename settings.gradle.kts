@@ -43,5 +43,4 @@ file("./grpc")
     }
 
 includeBuild("./gradle-plugin")
-
 include(":ktransport", ":ktransport-ksp", ":example")

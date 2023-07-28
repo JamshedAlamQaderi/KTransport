@@ -24,7 +24,7 @@ jobs:
           check-latest: true
           cache: 'gradle'
       - name: Publish library to maven central
-        run: ./gradlew :ktransport:publish :ktransport-ksp:publish
+        run: ./gradlew :ktransport:publish :ktransport-ksp:publish :protos:publish :grpc-common:publish :generate-proto:publish
         env:
           ORG_GRADLE_PROJECT_projectVersion: ${{ github.ref_name }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}
