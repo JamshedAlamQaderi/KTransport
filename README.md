@@ -1,4 +1,6 @@
-﻿# KTransport
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android) ![JVM](https://img.shields.io/badge/JVM-007396?style=for-the-badge&logo=kotlin) ![JS](https://img.shields.io/badge/Kotlin/Js-F7DF1E?style=for-the-badge&logo=kotlin) ![Kotlin/Wasm](https://img.shields.io/badge/Kotlin%2FWASM-0095D5?&style=for-the-badge&logo=kotlin)
+ 
+ # KTransport
  
  ![CI](https://github.com/JamshedAlamQaderi/KTransport/actions/workflows/ci.yaml/badge.svg) ![Analyse](https://github.com/JamshedAlamQaderi/KTransport/actions/workflows/analysis.yaml/badge.svg) ![Publish](https://github.com/JamshedAlamQaderi/KTransport/actions/workflows/publish.yaml/badge.svg) [![CodeFactor](https://www.codefactor.io/repository/github/jamshedalamqaderi/ktransport/badge)](https://www.codefactor.io/repository/github/jamshedalamqaderi/ktransport) [![Coverage](https://codecov.io/gh/JamshedAlamQaderi/KTransport/branch/main/graph/badge.svg?token=AAVO2UQXLP)](https://codecov.io/gh/JamshedAlamQaderi/KTransport)
 
