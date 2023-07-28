@@ -5,9 +5,9 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
-//ktransport {
+// ktransport {
 //    packageName = "com.jamshedalamqaderi.ktransport.example.ksp"
-//}
+// }
 
 ksp {
     arg(
@@ -31,6 +31,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":ktransport"))
+//                implementation("com.jamshedalamqaderi.ktransport:ktransport:0.0.1-dev-17")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
             }
@@ -50,4 +51,5 @@ kotlin {
 
 dependencies {
     add("kspJvm", project(":ktransport-ksp"))
+//    add("kspJvm", "com.jamshedalamqaderi.ktransport:ktransport-ksp:0.0.1-dev-17")
 }

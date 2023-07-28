@@ -8,7 +8,6 @@ import com.google.protobuf.gradle.protoc
 
 plugins {
     kotlin("jvm")
-    java
     id("com.google.protobuf")
 }
 

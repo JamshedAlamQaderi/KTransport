@@ -4,6 +4,7 @@ pluginManagement {
         google()
         gradlePluginPortal()
         maven(url = "https://jitpack.io")
+        mavenLocal()
     }
 
     plugins {
@@ -27,13 +28,11 @@ dependencyResolutionManagement {
         mavenCentral()
         google()
         maven(url = "https://jitpack.io")
+        mavenLocal()
     }
 }
 
 rootProject.name = "ktransport-project"
-
-includeBuild("./gradle-plugin")
-include(":ktransport", ":ktransport-ksp")
 
 file("./grpc")
     .listFiles()
@@ -43,4 +42,6 @@ file("./grpc")
         project(":${dir.name}").projectDir = dir.absoluteFile
     }
 
-include(":example")
+includeBuild("./gradle-plugin")
+
+include(":ktransport", ":ktransport-ksp", ":example")

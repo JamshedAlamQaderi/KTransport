@@ -3,7 +3,6 @@ import io.github.timortel.kotlin_multiplatform_grpc_plugin.generate_mulitplatfor
 plugins {
     kotlin("multiplatform")
     id("io.github.timortel.kotlin-multiplatform-grpc-plugin")
-    id("com.android.library")
 }
 
 val grpcMPLibVersion: String by project
@@ -13,24 +12,10 @@ dependencies {
     commonMainApi("com.github.TimOrtel.GRPC-Kotlin-Multiplatform:grpc-multiplatform-lib:$grpcMPLibVersion")
 }
 
-android {
-    compileSdk = 33
-    sourceSets["main"].manifest.srcFile("${project.projectDir}/src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = 21
-        targetSdk = 33
-    }
-}
-
 kotlin {
-    android {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
-        publishLibraryVariants("release")
-    }
     jvm()
     js(IR) {
+        useCommonJs()
         browser()
     }
     sourceSets {
