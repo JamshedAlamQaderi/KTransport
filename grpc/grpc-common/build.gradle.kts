@@ -2,6 +2,7 @@ import io.github.timortel.kotlin_multiplatform_grpc_plugin.generate_mulitplatfor
 
 plugins {
     kotlin("multiplatform")
+    id("com.android.library")
     id("io.github.timortel.kotlin-multiplatform-grpc-plugin")
     id("com.vanniktech.maven.publish")
 }
@@ -13,11 +14,29 @@ dependencies {
     commonMainApi("com.github.TimOrtel.GRPC-Kotlin-Multiplatform:grpc-multiplatform-lib:$grpcMPLibVersion")
 }
 
+android {
+    namespace = "com.jamshedalamqaderi.ktransport.grpccommon"
+    compileSdk = 31
+    sourceSets["main"].manifest.srcFile("${project.projectDir}/src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = 21
+        targetSdk = 31
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
 kotlin {
     jvm()
     js(IR) {
         useCommonJs()
         browser()
+    }
+    android {
+        publishLibraryVariants("release")
     }
     sourceSets {
         val commonMain by getting {

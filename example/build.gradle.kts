@@ -1,7 +1,7 @@
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
-    id("com.jamshedalamqaderi.ktransport.gradle-plugin") //version "1.0.3"
+    id("com.jamshedalamqaderi.ktransport.gradle-plugin") // version "1.0.3"
 }
 
 ktransport {
@@ -13,7 +13,9 @@ val coroutineVersion: String by project
 val kotlinVersion: String by project
 
 kotlin {
-    jvm()
+    jvm {
+        withJava()
+    }
     js(IR) {
         browser()
         binaries.executable()

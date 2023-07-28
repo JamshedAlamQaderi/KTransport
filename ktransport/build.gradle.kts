@@ -11,19 +11,17 @@ val coroutineVersion: String by project
 val kotlinVersion: String by project
 
 android {
-    compileSdk = 33
+    namespace = "com.jamshedalamqaderi.ktransport"
+    compileSdk = 31
     sourceSets["main"].manifest.srcFile("${project.projectDir}/src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 31
     }
 }
 
 kotlin {
     android {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
         publishLibraryVariants("release")
     }
     jvm {
@@ -75,9 +73,6 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-js"))
             }
-        }
-        val androidMain by getting {
-            dependsOn(jvmMain)
         }
     }
 }
