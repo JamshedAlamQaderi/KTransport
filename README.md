@@ -1,6 +1,6 @@
 ﻿# KTransport
  
- ![CI](https://github.com/JamshedAlamQaderi/KTransport/actions/workflows/ci.yml/badge.svg) ![Analyse](https://github.com/JamshedAlamQaderi/KTransport/actions/workflows/analyse.yml/badge.svg) ![Publish](https://github.com/JamshedAlamQaderi/KTransport/actions/workflows/publish.yml/badge.svg) [![CodeFactor](https://www.codefactor.io/repository/github/jamshedalamqaderi/KTransport/badge)](https://www.codefactor.io/repository/github/jamshedalamqaderi/KTransport) [![Coverage](https://codecov.io/gh/JamshedAlamQaderi/KTransport/branch/main/graph/badge.svg?token=AAVO2UQXLP)](https://codecov.io/gh/JamshedAlamQaderi/KTransport)
+ ![CI](https://github.com/JamshedAlamQaderi/KTransport/actions/workflows/ci.yaml/badge.svg) ![Analyse](https://github.com/JamshedAlamQaderi/KTransport/actions/workflows/analyse.yaml/badge.svg) ![Publish](https://github.com/JamshedAlamQaderi/KTransport/actions/workflows/publish.yaml/badge.svg) [![CodeFactor](https://www.codefactor.io/repository/github/jamshedalamqaderi/ktransport/badge)](https://www.codefactor.io/repository/github/jamshedalamqaderi/ktransport) [![Coverage](https://codecov.io/gh/JamshedAlamQaderi/KTransport/branch/main/graph/badge.svg?token=AAVO2UQXLP)](https://codecov.io/gh/JamshedAlamQaderi/KTransport)
 
 KTransport is a Kotlin Multiplatform library built on top of gRPC, that enables you to easily create
 cross-platform
