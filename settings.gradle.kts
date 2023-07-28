@@ -32,7 +32,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ktransport-project"
+rootProject.name = "ktransport-main"
 
 file("./grpc")
     .listFiles()
