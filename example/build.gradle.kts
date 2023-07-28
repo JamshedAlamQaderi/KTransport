@@ -1,22 +1,11 @@
-import com.jamshedalamqaderi.ktransport.plugin.KTransportDeps
-
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
-    id("com.jamshedalamqaderi.ktransport.gradle-plugin") version "1.0.1"
-//    id("com.google.devtools.ksp")
+    id("com.jamshedalamqaderi.ktransport.gradle-plugin") //version "1.0.3"
 }
 
 ktransport {
     packageName = "com.jamshedalamqaderi.ktransport.example.ksp"
-}
-
-ksp {
-    arg(
-        "buildDir",
-        buildDir.absolutePath
-    )
-    arg("packageName", "com.jamshedalamqaderi.ktransport.example.ksp")
 }
 
 val kotlinxSerializationVersion: String by project
@@ -32,12 +21,11 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-//                implementation(project(":ktransport"))
-                implementation(KTransportDeps.ktransport)
+//                implementation(KTransportDeps.ktransport)
+                implementation(project(":ktransport"))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
             }
-            kotlin.srcDir("${buildDir.absolutePath}/generated/ktransport/metadata/commonMain/kotlin")
         }
         val commonTest by getting {
             dependencies {
@@ -46,12 +34,6 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {}
-            kotlin.srcDir("${buildDir.absolutePath}/generated/ktransport/jvm/jvmMain/kotlin")
         }
     }
 }
-
-// dependencies {
-//    add("kspJvm", project(":ktransport-ksp"))
-// //    add("kspJvm", "com.jamshedalamqaderi.ktransport:ktransport-ksp:0.0.1-dev-18")
-// }
