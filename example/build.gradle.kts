@@ -11,13 +11,13 @@ ktransport {
     packageName = "com.jamshedalamqaderi.ktransport.example.ksp"
 }
 
-//ksp {
-//    arg(
-//        "buildDir",
-//        buildDir.absolutePath
-//    )
-//    arg("packageName", "com.jamshedalamqaderi.ktransport.example.ksp")
-//}
+ksp {
+    arg(
+        "buildDir",
+        buildDir.absolutePath
+    )
+    arg("packageName", "com.jamshedalamqaderi.ktransport.example.ksp")
+}
 
 val kotlinxSerializationVersion: String by project
 val coroutineVersion: String by project
@@ -51,7 +51,7 @@ kotlin {
     }
 }
 
-//dependencies {
+// dependencies {
 //    add("kspJvm", project(":ktransport-ksp"))
-////    add("kspJvm", "com.jamshedalamqaderi.ktransport:ktransport-ksp:0.0.1-dev-18")
-//}
+// //    add("kspJvm", "com.jamshedalamqaderi.ktransport:ktransport-ksp:0.0.1-dev-18")
+// }

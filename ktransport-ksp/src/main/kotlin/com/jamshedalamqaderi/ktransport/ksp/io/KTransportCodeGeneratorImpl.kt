@@ -41,9 +41,9 @@ class KTransportCodeGeneratorImpl(
     override fun cleanAll() {
         val deleteDir = File(baseDir)
         if (deleteDir.deleteRecursively()) {
-            logger.info("Cleaned all files and folders located at path: $baseDir")
+            logger.warn("Cleaned all files and folders located at path: $deleteDir")
         } else {
-            logger.error("Couldn't clean all files and folders from path: $baseDir")
+            logger.error("Couldn't clean all files and folders from path: $deleteDir")
         }
     }
 

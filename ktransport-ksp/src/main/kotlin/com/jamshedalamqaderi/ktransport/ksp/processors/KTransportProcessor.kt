@@ -66,10 +66,12 @@ class KTransportProcessor(
                 option.packageName + ".client",
                 ksClassDeclaration.simpleName.asString()
             )
-        val visitor = block(logger, fileSpecBuilder)
-        ksClassDeclaration.accept(visitor, Unit)
-        val fileSpec = fileSpecBuilder.build()
-        fileSpec.writeTo(outputDir)
+//        fileSpec.writeTo(outputDir)
+        checkAndWriteToFile(outputDir, fileSpecBuilder.packageName, fileSpecBuilder.name) {
+            val visitor = block(logger, fileSpecBuilder)
+            ksClassDeclaration.accept(visitor, Unit)
+            fileSpecBuilder.build()
+        }
     }
 
     private fun visitMultipleServiceInOneVisitor(
@@ -83,14 +85,34 @@ class KTransportProcessor(
             option.packageName + ".$packageSuffix",
             filename
         )
-        val visitor = block(
-            kTransportServiceSymbols,
-            fileSpecBuilder,
-            logger
-        )
+//        fileSpec.writeTo(outputDir)
+        checkAndWriteToFile(outputDir, fileSpecBuilder.packageName, fileSpecBuilder.name) {
+            val visitor = block(
+                kTransportServiceSymbols,
+                fileSpecBuilder,
+                logger
+            )
 
-        visitor.commit()
-        val fileSpec = fileSpecBuilder.build()
-        fileSpec.writeTo(outputDir)
+            visitor.commit()
+            fileSpecBuilder.build()
+        }
+    }
+
+    private fun checkAndWriteToFile(
+        outputDir: File,
+        packageName: String,
+        filename: String,
+        postCallback: () -> FileSpec
+    ) {
+        val outputPackageDir = File(outputDir, packageName.replace(".", "/"))
+        if (!outputPackageDir.exists()) {
+            outputPackageDir.mkdirs()
+        }
+        val outputFile = File(outputPackageDir, "$filename.kt")
+        if (!outputFile.exists()) {
+            postCallback.invoke().writeTo(outputDir)
+        } else {
+            logger.warn("File already exists. Skipping re-writing to the file: ${outputFile.path}")
+        }
     }
 }
