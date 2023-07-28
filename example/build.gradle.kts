@@ -30,8 +30,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-//                implementation(project(":ktransport"))
-                implementation("com.jamshedalamqaderi.ktransport:ktransport:0.0.1-dev-18")
+                implementation(project(":ktransport"))
+//                implementation("com.jamshedalamqaderi.ktransport:ktransport:0.0.1-dev-18")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
             }
@@ -50,6 +50,6 @@ kotlin {
 }
 
 dependencies {
-//    add("kspJvm", project(":ktransport-ksp"))
-    add("kspJvm", "com.jamshedalamqaderi.ktransport:ktransport-ksp:0.0.1-dev-18")
+    add("kspJvm", project(":ktransport-ksp"))
+//    add("kspJvm", "com.jamshedalamqaderi.ktransport:ktransport-ksp:0.0.1-dev-18")
 }
