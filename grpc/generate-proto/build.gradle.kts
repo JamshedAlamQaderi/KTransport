@@ -9,6 +9,7 @@ import com.google.protobuf.gradle.protoc
 plugins {
     kotlin("jvm")
     id("com.google.protobuf")
+    id("com.vanniktech.maven.publish")
 }
 
 val protobufVersion: String by project
@@ -57,4 +58,34 @@ protobuf {
             }
         }
     }
+}
+
+mavenPublishing {
+    pom {
+        name.set("KTransport Proto Generator")
+        description.set("Proto Generator for KTransport gRPC Common")
+        inceptionYear.set("2023")
+        url.set("https://github.com/JamshedAlamQaderi/KTransport")
+        licenses {
+            license {
+                name.set("The Apache License, Version 2.0")
+                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+            }
+        }
+        developers {
+            developer {
+                id.set("JamshedAlamQaderi")
+                name.set("Jamshed Alam Qaderi")
+                url.set("https://github.com/JamshedAlamQaderi")
+            }
+        }
+        scm {
+            url.set("https://github.com/JamshedAlamQaderi/KTransport")
+            connection.set("scm:git:git://github.com/JamshedAlamQaderi/KTransport.git")
+            developerConnection.set("scm:git:ssh://git@github.com/JamshedAlamQaderi/KTransport.git")
+        }
+    }
+    signAllPublications()
+    publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.S01, true)
 }

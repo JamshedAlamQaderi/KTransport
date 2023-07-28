@@ -3,6 +3,7 @@ import io.github.timortel.kotlin_multiplatform_grpc_plugin.generate_mulitplatfor
 plugins {
     kotlin("multiplatform")
     id("io.github.timortel.kotlin-multiplatform-grpc-plugin")
+    id("com.vanniktech.maven.publish")
 }
 
 val grpcMPLibVersion: String by project
@@ -50,4 +51,34 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
     filter {
         exclude { projectDir.toURI().relativize(it.file.toURI()).path.contains("/generated/") }
     }
+}
+
+mavenPublishing {
+    pom {
+        name.set("KTransport GRPC Common")
+        description.set("gRPC multiplatform supports for KTransport")
+        inceptionYear.set("2023")
+        url.set("https://github.com/JamshedAlamQaderi/KTransport")
+        licenses {
+            license {
+                name.set("The Apache License, Version 2.0")
+                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+            }
+        }
+        developers {
+            developer {
+                id.set("JamshedAlamQaderi")
+                name.set("Jamshed Alam Qaderi")
+                url.set("https://github.com/JamshedAlamQaderi")
+            }
+        }
+        scm {
+            url.set("https://github.com/JamshedAlamQaderi/KTransport")
+            connection.set("scm:git:git://github.com/JamshedAlamQaderi/KTransport.git")
+            developerConnection.set("scm:git:ssh://git@github.com/JamshedAlamQaderi/KTransport.git")
+        }
+    }
+    signAllPublications()
+    publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.S01, true)
 }
