@@ -16,7 +16,6 @@ android {
     sourceSets["main"].manifest.srcFile("${project.projectDir}/src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 21
-        targetSdk = 31
     }
 }
 
