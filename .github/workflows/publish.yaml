@@ -22,7 +22,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           check-latest: true
-          cache: 'gradle'
       - name: Publish library to maven central
         run: ./gradlew :ktransport:publish :ktransport-ksp:publish :grpc-common:publish :generate-proto:publish
         env:
