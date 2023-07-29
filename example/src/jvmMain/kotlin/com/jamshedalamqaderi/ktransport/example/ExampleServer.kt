@@ -4,7 +4,7 @@ import com.jamshedalamqaderi.ktransport.api.KTransport
 import com.jamshedalamqaderi.ktransport.api.KTransportServer
 import com.jamshedalamqaderi.ktransport.example.ksp.server.services
 
-fun main(args: Array<String>) {
+fun main() {
     KTransportServer
         .createServer(16999, KTransport.services)
         .start()

@@ -5,6 +5,7 @@ plugins {
     id("com.gradle.plugin-publish") version "1.1.0"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
     id("org.jetbrains.kotlinx.kover") version "0.6.1"
+    id("io.woong.buildconfig") version "0.1.1"
 }
 val projectVersion: String? by project
 
@@ -48,4 +49,9 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+buildConfig {
+    this.packageName = "com.jamshedalamqaderi.ktransport.plugin"
+    field("kTransportVersion", project.version.toString())
 }

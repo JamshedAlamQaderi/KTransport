@@ -1,3 +1,5 @@
+import com.jamshedalamqaderi.ktransport.plugin.KTransportDeps
+
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
@@ -23,8 +25,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-//                implementation(KTransportDeps.ktransport)
-                implementation(project(":ktransport"))
+                implementation(KTransportDeps.ktransport)
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
             }
