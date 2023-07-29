@@ -23,7 +23,10 @@ class KTransportPlugin : Plugin<Project> {
                 arg("packageName", extension.packageName ?: "ktransport")
             }
 
-            dependencies.add("kspJvm", KTransportDeps.ksp)
+            dependencies.add(
+                "kspJvm",
+                "com.jamshedalamqaderi.ktransport:ktransport-ksp:${BuildConfig.kTransportVersion}"
+            )
             val kotlinExtension =
                 extensions.getByName("kotlin") as org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
             val kotlinSourceSets = kotlinExtension.sourceSets
