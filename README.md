@@ -82,7 +82,7 @@ The example dir include all the necessary setup dependencies and code
 
 # Contributing
 
-We welcome contributions to Spintaxkt! If you have an idea for a new feature or bug fix, please open
+We welcome contributions to KTranport! If you have an idea for a new feature or bug fix, please open
 an issue or pull request.
 
 ## Support
